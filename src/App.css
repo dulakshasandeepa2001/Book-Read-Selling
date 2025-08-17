@@ -117,4 +117,40 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .books-container {
+    display: flex;
+    justify-content: center; /* centers items horizontally */
+    gap: 20px; /* adds space between books */
+    flex-wrap: wrap; /* allows wrapping on smaller screens */
+    padding: 20px 0;
+  }
+
+  .book-cover {
+    width: 100%;
+    height: 220px; /* Fixed height to match the first book */
+    object-fit: cover;
+    border-radius: 12px;
+    aspect-ratio: 2/3; /* Classic book cover ratio */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Add a subtle reflection effect like the first book has */
+  .book-cover-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .book-cover-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    border-radius: 12px 12px 0 0;
+    pointer-events: none;
+  }
 }

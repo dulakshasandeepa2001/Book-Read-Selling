@@ -1,11 +1,13 @@
 import React from 'react';
+import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import { books } from './data/books';
+import './App.css';
+
 import Header from './components/Header';
 import BookCard from './components/BookCard';
 import BookDetail from './components/BookDetail';
 import SEOHead from './components/SEOHead';
-import { books } from './data/books';
-import './App.css';
-import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import SearchPage from './pages/SearchPage';
 import {
   TheGreatGatsbyPage,
   TheHobbitPage,
@@ -13,8 +15,6 @@ import {
   ModernLiteratureCollectionPage,
   MobyDickPage
 } from './pages/books';
-// ...existing code...
-
 function Home() {
   return (
     <>
@@ -31,9 +31,11 @@ function Home() {
               Explore thousands of books, read online, or download for offline reading. 
               Your literary journey starts here.
             </p>
+
           </div>
+
           {/* Books Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="flex flex-wrap justify-center gap-8">
             {books.map((book) => (
               <BookCard key={book.id} book={book} />
             ))}
@@ -76,13 +78,13 @@ function CategoryPage() {
               Explore the best books in {category}.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="flex flex-wrap justify-center gap-8">
             {filteredBooks.length > 0 ? (
               filteredBooks.map((book) => (
                 <BookCard key={book.id} book={book} />
               ))
             ) : (
-              <div className="col-span-full text-center text-gray-400">No books found in this category.</div>
+              <div className="w-full text-center text-gray-400">No books found in this category.</div>
             )}
           </div>
         </div>
@@ -128,6 +130,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/book/:id" element={<BookDetailPage />} />
       <Route path="/category/:category" element={<CategoryPage />} />
+      <Route path="/search" element={<SearchPage />} />
       
       {/* Individual book pages */}
       <Route path="/books/the-great-gatsby" element={<TheGreatGatsbyPage />} />
@@ -138,7 +141,5 @@ function App() {
     </Routes>
   );
 }
-
-// ...existing code...
 
 export default App;
